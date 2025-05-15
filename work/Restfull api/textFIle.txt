@@ -1,0 +1,10 @@
+REST API
+
+GET api/users - list all user json
+
+GET api/users/1 - Get the user with id
+
+Dynamic Path Parameters
+GET api/users/:id 
+
+
