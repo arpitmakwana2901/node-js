@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Hello From Home Page</h1>
+    <table border="">
+        <form action="addData" method="post">
+            <tr>
+                <td>Name</td>
+                <td><input name="userName" type="text"></td>
+            </tr>
+            <tr>
+                <td>Age</td>
+                <td><input name="age" type="text"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button>Submit</button></td>
+            </tr>
+        </form>
+    </table>
+
+    <br><br>
+
+    <h2>Table Data</h2>
+<table border="">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+   <% arrData.forEach((item,index)=>{ %>
+     <tr>
+      <td><%= item.userName %></td>
+      <td><%= item.age %></td>
+     </tr>
+
+
+   <% }) %>
+
+  </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+  </head>
+  <body>
+    <h1>Home Page</h1>
+    <table border="">
+      <form action="/addrecord" method="post">
+        <tr>
+          <td>Name</td>
+          <td><input name="userName" "text"></td>
+        </tr>
+        <tr>
+          <td>Age</td>
+          <td><input name="age" type="text" /></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" /></td>
+        </tr>
+      </form>
+    </table>
+    <br /><br />
+    <h2>Table Data</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% record.forEach((item,i)=>{ %>
+        <tr>
+          <td><%= item.userName %></td>
+          <td><%= item.age %></td>
+          <td>
+            <a href="/delete/<%= i %>"><button>Delete</button></a>
+          </td>
+        </tr>
+
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>

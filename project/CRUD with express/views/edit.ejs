@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit</title>
+    <!-- <style>
+        body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: white;
+  border-collapse: collapse;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+td {
+  padding: 12px 15px;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+td:first-child {
+  font-weight: bold;
+  width: 30%;
+}
+
+input[required] {
+  border-left: 3px solid #ff9800;
+}
+    </style> -->
+  
+    <style>
+        /* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global typography and body styling */
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+  color: #1f2937;
+  line-height: 1.7;
+  padding: 30px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Heading */
+h1 {
+  font-size: 2.3rem;
+  font-weight: 600;
+  color: #1e40af;
+  text-align: center;
+  margin-bottom: 30px;
+  background: linear-gradient(to right, #1e40af, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-collapse: collapse;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+table:hover {
+  transform: translateY(-4px);
+}
+
+/* Table cells */
+td {
+  padding: 16px;
+}
+
+td:first-child {
+  font-weight: 600;
+  color: #1e40af;
+  width: 35%;
+  background: linear-gradient(to right, #f8fafc, #f1f5f9);
+}
+
+/* Form inputs */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  background: #ffffff;
+}
+
+/* Required field styling */
+input[required] {
+  border-left: 4px solid #f59e0b;
+}
+
+/* Select dropdown */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%231e40af' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 35px;
+}
+
+/* Submit button */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, #3b82f6, #1e40af);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(to right, #2563eb, #1e3a8a);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px RGBA(59, 130, 246, 0.4);
+}
+
+button[type="submit"]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+button[type="submit"]:active::after {
+  width: 150px;
+  height: 150px;
+}
+
+/* Label for required fields */
+td:first-child:has(+ td input[required])::after {
+  content: " *";
+  color: #ef4444;
+  font-weight: bold;
+}
+    </style>
+
+</head>
+  <body>
+    <h1>Update Form</h1>
+    <table border="">
+      <form action="/updateData" method="post">
+        <input name="id" type="hidden" value="<%= id %>" />
+        <tr>
+          <td>Name</td>
+          <td>
+            <input type="text" name="userName" value="<%= getData.userName %>" />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Age</td>
+          <td><input type="number" name="age" value="<%= getData.age %>" /></td>
+        </tr>
+
+        <tr>
+          <td>Email*</td>
+          <td><input type="email" name="email" value="<%= getData.email %>" required /></td>
+        </tr>
+
+        <tr>
+          <td>Phone Number</td>
+          <td><input type="tel" name="phone" value="<%= getData.phone %>" pattern="[0-9]{10}" placeholder="10-digit number" /></td>
+        </tr>
+
+        <tr>
+          <td>Gender</td>
+          <td>
+            <select name="gender">
+              <option value="">Select</option>
+              <option value="male" <%= getData.gender === 'male' ? 'selected' : '' %>>Male</option>
+              <option value="female" <%= getData.gender === 'female' ? 'selected' : '' %>>Female</option>
+              <option value="other" <%= getData.gender === 'other' ? 'selected' : '' %>>Other</option>
+              <option value="prefer-not-to-say" <%= getData.gender === 'prefer-not-to-say' ? 'selected' : '' %>>Prefer not to say</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>City</td>
+          <td><input type="text" name="city" value="<%= getData.city %>" /></td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td><button type="submit">Update</button></td>
+        </tr>
+      </form>
+    </table>
+  </body>
+</html>
