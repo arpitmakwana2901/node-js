@@ -43,8 +43,7 @@ app.post("/updateData", (req, res) => {
   // console.log("Update Successsfully");
   // res.redirect("/");
 
-
-  const id = req.body.id;
+  const id = req.body.id; 
   const updatedData = {
     userName: req.body.userName,
     age: req.body.age,
