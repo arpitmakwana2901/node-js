@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", async (req, res) => {
   try {
     let showData = await UserModal.find({});
-
+    console.log(showData);
     res.render("home", { showData });
   } catch (error) {
     console.log(error);
@@ -19,12 +19,12 @@ app.get("/", async (req, res) => {
 app.get("/delete/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    console.log(id);    
+    console.log(id);
     const deleteData = await UserModal.findByIdAndDelete(id);
     console.log(deleteData);
     res.redirect("/");
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 });
 app.post("/add", async (req, res) => {
@@ -37,6 +37,23 @@ app.post("/add", async (req, res) => {
   }
 });
 
+app.get("/edit/:id", async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const editData = await UserModal.findById(id);
+  console.log(editData);
+  res.render("edit", { editData });
+});
+
+app.post("/update", async (req, res) => {
+  try {
+    console.log(req.body);
+    await UserModal.findByIdAndUpdate(req.body.id, req.body);
+    res.redirect("/");
+  } catch (err) {
+    console.log(err);
+  }
+});
 app.listen(PORT, (error) => {
   if (error) {
     console.log("server is not connecting", error);
