@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Home Page !</h1>
+    <form action="/add" method="post" enctype="multipart/form-data">
+      <table border="">
+        <tr>
+          <td>image</td>
+          <td><input type="file" name="image" /></td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td><button>Submit</button></td>
+        </tr>
+      </table>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>images</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% showData.forEach((item)=>{ %>
+
+        <tr>
+          <td>
+            <img src="<%= item.image %>" height="100px" width="100px" alt="" />
+          </td>
+        </tr>
+
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>

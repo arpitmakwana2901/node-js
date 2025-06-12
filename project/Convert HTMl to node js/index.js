@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT= 3690;
+const PORT= 8080;
 app.set("view engine","ejs");
 app.use(express.urlencoded({extended:true}));
 
@@ -9,7 +9,7 @@ app.get("/",(req,res)=>{
 })
 
 app.get("/about",(req,res)=>{    
-    res.render("about") 
+    res.render("about")  
 }) 
 
 app.get("/contact",(req,res)=>{ 
@@ -20,10 +20,12 @@ app.get("/services",(req,res)=>{
     res.render("services")
 })
 
-app.listen(PORT,(err)=>{
+app.listen(PORT,(err)=>{ 
 if(err){
     console.log("Server is not connected")
-}else{
-    console.log("Server is connected",PORT)
+    
 }
-})
+    console.log("Server is connected",PORT)
+
+})  
+ 

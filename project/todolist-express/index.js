@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = 3699;
+const PORT = 3690;
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
@@ -56,6 +56,8 @@ app.post("/updateData", (req, res) => {
 console.log("Update Successfully:", updatedData);
   res.redirect("/");// Or wherever you want to redirect
 });
+
+
 app.listen(PORT, (error) => {
   if (error) { 
     console.log("server is not connecting");
