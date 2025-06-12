@@ -14,8 +14,8 @@ app.get("/",async (req, res) => {
      let showData = await multerModel.find({});
     console.log(showData)
   res.render("home",{showData});
-   }catch(err){
-    console.log(err);   
+   }catch(error){
+    console.log(error);   
    }
 }); 
 
