@@ -1,12 +1,10 @@
 const express = require("express");
-const { signupValidation } = require("../middlewere/authValidation");
-const { signupController } = require("../controller/authController");
+const { signupValidation, loginValidation } = require("../middlewere/authValidation");
+const { signupController, loginController } = require("../controller/authController");
 const authRouer = express.Router();
 
-authRouer.post("/login",(req,res)=>{
-    res.send("Login Seccess")
-})
+authRouer.post("/login",loginValidation,loginController)
 
 authRouer.post("/signup",signupValidation,signupController)
 
-module.exports = authRouer; 
+module.exports = authRouer;   

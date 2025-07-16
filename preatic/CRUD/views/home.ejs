@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home page</title>
+  </head>
+  <body>
+    <h1>Home Page</h1>
+    <table>
+      <form action="/user/add" method="post" enctype="multipart/form-data">
+        <tr>
+          <td>Name</td>
+          <td><input type="text" name="userName" id="userName" placeholder="name" /></td>
+        </tr>
+
+        <tr>
+          <td>age</td>
+          <td><input type="number" name="age" placeholder="age" /></td>
+        </tr>
+
+        <tr>
+          <td>Image</td>
+          <td><input type="file" name="image" /></td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td><button type="submit">Submit</button></td>
+        </tr>
+      </form>
+    </table>
+
+    <table border="">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Image</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% userData.forEach((items) => { %>
+            <tr>
+                <td><%= items.userName %></td>
+                <td><%= items.age %></td>
+                <td><img src="<%= items.image %>" height="100px" width="100px" alt=""></td>
+                <td><a href="/delete/<%= items.id %>"><button>Delete</button></a></td>
+            </tr>
+       <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>

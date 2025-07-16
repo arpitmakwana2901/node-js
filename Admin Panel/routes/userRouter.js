@@ -2,11 +2,11 @@ const express = require("express");
 const UserModal = require("../models/userModel");
 const userRouter = express.Router();
 const cookieParser = require("cookie-parser");
-const nodemailer = require("nodemailer")
+const nodemailer = require("nodemailer");
 userRouter.get("/", (req, res) => {
   return res.render("signIn");
 });
-
+ 
 userRouter.get("/signup", (req, res) => {
   res.render("signUp");
 });
@@ -58,17 +58,14 @@ userRouter.get("/logout", (req, res) => {
   res.redirect("/userdata");
 });
 
-
 userRouter.get("/otpPage", (req, res) => {
-  res.render("otp"); 
+  res.render("otp");
 });
-
-
 
 userRouter.post("/otpCheck", async (req, res) => {
   const { email } = req.body;
-  console.log(email)
-  let userData = await UserModal.findOne({email: req.body.email });
+  console.log(email);
+  let userData = await UserModal.findOne({ email: req.body.email });
   console.log(userData);
 
   if (!userData) {
@@ -77,13 +74,14 @@ userRouter.post("/otpCheck", async (req, res) => {
   }
 
   let otp = Math.floor(Math.random() * 10000);
+  res.cookie("storeOtp", { otp, email: userData.email });
   console.log("Generated OTP", otp);
 
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: "arpitmakwana7376@gmail.com",
-      // pass: "moqe ejow zcif hpzt", 
+      // pass: "moqe ejow zcif hpzt",
     },
   });
 
@@ -101,17 +99,74 @@ userRouter.post("/otpCheck", async (req, res) => {
       console.log("Email sent:", info.response);
     }
   });
-  res.redirect("/userdata/otpPage") 
+  res.redirect("/userdata/otpPage");
 });
 
 userRouter.post("/otpPage", (req, res) => {
-  res.redirect("/userdata/changePass"); 
+  console.log("Form body:", req.body);
+  let { postOtp } = req.body;
+  console.log("Submitted OTP:", postOtp);
+
+  let localOtp = req.cookies.storeOtp;
+  console.log("Stored OTP:", localOtp);
+
+  if (!localOtp) {
+    console.log("No OTP cookie found");
+    return res.redirect("/userdata/otpPage");
+  }
+
+  if (postOtp == localOtp.otp) {
+    return res.redirect("/userdata/changePass");
+  } else {
+    console.log("Invalid OTP");
+    return res.redirect("/userdata/otpPage");
+  }
 });
 
-userRouter.get("/changePass",(req,res)=>{
-  res.render("changePassword")
+userRouter.get("/changePass", (req, res) => {
+  res.render("changePassword");
 });
 
+userRouter.post("/changePass", (req, res) => {
+  res.render("changePassword");
+});
 
+userRouter.post("/updatePassword", async (req, res) => {
+  const { newPassword, confirmPassword } = req.body;
+  const { email } = req.cookies.storeOtp;
+
+  console.log(req.body, "body new password");
+  console.log(email, "update email");
+
+  try {
+    if (newPassword === confirmPassword) {
+      const updatedPassword = await UserModal.findOneAndUpdate(
+        { email: email },
+        { password: newPassword }
+      );
+      // console.log(updatedPassword, "updated password");
+      const updatedData = await UserModal.findOne({ email });
+      console.log("updated Data", updatedData);
+
+      if (!updatedPassword) {
+        console.log("User not found");
+        return res.redirect("/userdata/changePass");
+      }
+      res.cookie("updated", {
+        email: updatedPassword.email,
+        // password: updatedPassword.newPassword,
+        password: updatedPassword.newPassword, 
+      });
+      console.log(res.cookie, "updated cookie");
+      return res.redirect("/userdata/");
+    } else {
+      console.log("Passwords do not match");
+      return res.redirect("/userdata/changePass");
+    }
+  } catch (error) {
+    console.log(error);
+    return res.redirect("/userdata/changePass");
+  }
+});
 
 module.exports = userRouter;
