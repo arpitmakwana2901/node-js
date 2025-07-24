@@ -22,9 +22,11 @@ todolistRoute.get("/",auth, async (req, res) => {
   }  
 });
 
-todolistRoute.post("/",  async (req, res) => {
+todolistRoute.post("/", auth, async (req, res) => {
   try {
     const { task } = req.body;
+    console.log(task)
+    console.log(req.user)
 
     if (!task) {
       return res.status(400).json({ message: "Task is required" });

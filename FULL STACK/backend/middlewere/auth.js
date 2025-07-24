@@ -12,7 +12,7 @@ const auth = (req, res, next) => {
     
     if (!decoded || !decoded.user) {
       return res.status(403).json({ message: "Invalid token" });
-    }
+    } 
 
     req.user = decoded.user;
     next();

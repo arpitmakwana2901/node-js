@@ -44,18 +44,19 @@ userRouter.post("/register", async (req, res) => {
 userRouter.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(req.body);
     const user = await UserModel.findOne({ email });
     console.log(user);
     if (!user) {
-      return res.status(200).json({
+      return res.status(401).json({
         message: "No User Found",
         success: false,
       });
     }
 
-    if (await bcrypt.compare(password,user.password)) {
+    if (await bcrypt.compare(password, user.password)) {
       let token = jwt.sign({ user }, process.env.SECRET_KEY, {
-        expiresIn: "24h",
+        expiresIn: "5h",
       });
       console.log(token);
       return res.status(200).json({

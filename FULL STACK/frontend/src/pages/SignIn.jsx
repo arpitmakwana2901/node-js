@@ -1,7 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useAuth } from "../components/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -15,7 +19,9 @@ const SignIn = () => {
         input
       );
       console.log(responce);
+      login(responce.data.token);
       alert(responce.data.message);
+      navigate("/todolist")
     } catch (error) {
       console.log(error);
     }

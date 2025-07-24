@@ -15,5 +15,5 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-const UserModel = mongoose.model("todolist",userSchema);
+const UserModel = mongoose.model("auth_user",userSchema);
 module.exports = UserModel;
