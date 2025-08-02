@@ -33,9 +33,9 @@ app.use("/alldata", dashboardRouter);
 app.use("/userdata", userRouter); 
 app.listen(PORT, (error) => {  
   if (error) {           
-    console.log(error);   x``
+    console.log(error);   
   } else { 
     console.log("Server is running ",PORT);
     connection();
   }    
-});   
+});    

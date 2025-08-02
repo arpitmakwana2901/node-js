@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer");
 userRouter.get("/", (req, res) => {
   return res.render("signIn");
 });
- 
+
 userRouter.get("/signup", (req, res) => {
   res.render("signUp");
 });
@@ -155,7 +155,7 @@ userRouter.post("/updatePassword", async (req, res) => {
       res.cookie("updated", {
         email: updatedPassword.email,
         // password: updatedPassword.newPassword,
-        password: updatedPassword.newPassword, 
+        password: updatedPassword.newPassword,
       });
       console.log(res.cookie, "updated cookie");
       return res.redirect("/userdata/");
